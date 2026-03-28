@@ -1,7 +1,7 @@
 use anyhow::{Context, Result, bail, ensure};
 use serde::{Serialize, Serializer};
-use crate::asterisk::AsterixCategory;
-use crate::asterisk::cursor::Cursor;
+use crate::asterix::AsterixCategory;
+use crate::asterix::cursor::Cursor;
 
 fn serialize_fspec_hex<S>(fspec: &Vec<u8>, serializer: S) -> Result<S::Ok, S::Error>
 where

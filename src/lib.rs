@@ -1,1 +1,1 @@
-pub mod asterisk;
+pub mod asterix;
