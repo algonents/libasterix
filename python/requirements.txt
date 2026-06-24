@@ -1,0 +1,2 @@
+libasterix==0.31.0
+pytest>=8

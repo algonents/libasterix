@@ -1,0 +1,33 @@
+name: CI
+
+# Runs when a merge lands on staging (a merge produces a push to the branch).
+on:
+  push:
+    branches: [staging]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- Rust ---
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Rust unit tests
+        run: cargo test
+
+      # --- Python interop (our encoder verified by an independent decoder) ---
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"          # reference lib requires >= 3.10
+          cache: pip
+          cache-dependency-path: python/requirements.txt
+      - name: Install reference library
+        run: pip install -r python/requirements.txt
+
+      - name: Encode with our library
+        run: cargo run --example gen_cat062   # writes python/cat062.bin
+
+      - name: Verify with independent decoder
+        run: pytest python/
