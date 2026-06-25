@@ -1,10 +1,13 @@
 name: CI
 
-# Runs on PRs targeting staging (gate before merge) and on merges that land
-# on staging (a merge produces a push to the branch).
+# Runs on every push to feat/* and fix/* working branches, on merges that land
+# on staging, and on PRs targeting staging (gate before merge).
 on:
   push:
-    branches: [staging]
+    branches:
+      - staging
+      - "feat/**"
+      - "fix/**"
   pull_request:
     branches: [staging]
 
