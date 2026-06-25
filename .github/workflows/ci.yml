@@ -1,15 +1,18 @@
 name: CI
 
-# Runs when a merge lands on staging (a merge produces a push to the branch).
+# Runs on PRs targeting staging (gate before merge) and on merges that land
+# on staging (a merge produces a push to the branch).
 on:
   push:
+    branches: [staging]
+  pull_request:
     branches: [staging]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # --- Rust ---
       - uses: dtolnay/rust-toolchain@stable
@@ -18,7 +21,7 @@ jobs:
         run: cargo test
 
       # --- Python interop (our encoder verified by an independent decoder) ---
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"          # reference lib requires >= 3.10
           cache: pip
