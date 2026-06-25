@@ -28,12 +28,12 @@ jobs:
         with:
           python-version: "3.12"          # reference lib requires >= 3.10
           cache: pip
-          cache-dependency-path: tests/requirements.txt
+          cache-dependency-path: tests/python/requirements.txt
       - name: Install reference library
-        run: pip install -r tests/requirements.txt
+        run: pip install -r tests/python/requirements.txt
 
       - name: Encode with our library
-        run: cargo run --example gen_cat062   # writes tests/cat062.bin
+        run: cargo run --example gen_cat062   # writes tests/python/cat062.bin
 
       - name: Verify with independent decoder
-        run: pytest tests/
+        run: pytest tests/python/

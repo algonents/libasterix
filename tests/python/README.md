@@ -1,8 +1,8 @@
 # Python interop tests
 
 Independent verification of `libasterix`'s ASTERIX encoder against a separate
-reference implementation. Everything Python-related lives in this `tests/`
-folder; the Rust side stays at the repo root.
+reference implementation. Everything Python-related lives in this `tests/python/`
+folder; the top-level `tests/` directory is reserved for Rust integration tests.
 
 We encode a message with **our** library (Rust) and decode it with an
 **unrelated** reference library — [`libasterix`](https://github.com/zoranbosnjak/asterix-libs)
@@ -21,15 +21,15 @@ Cat062Record (Rust)  --our encoder-->  cat062.bin  --reference decoder-->  field
 Run from the repo root:
 
 ```sh
-python3 -m venv tests/.venv
-tests/.venv/bin/pip install -r tests/requirements.txt
+python3 -m venv tests/python/.venv
+tests/python/.venv/bin/pip install -r tests/python/requirements.txt
 ```
 
 ## Run
 
 ```sh
-cargo run --example gen_cat062          # Rust encodes -> tests/cat062.bin
-tests/.venv/bin/pytest tests/         # reference library decodes & verifies
+cargo run --example gen_cat062          # Rust encodes -> tests/python/cat062.bin
+tests/python/.venv/bin/pytest tests/python/         # reference library decodes & verifies
 ```
 
 ## Coverage

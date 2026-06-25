@@ -1,5 +1,5 @@
 /target
-/tests/.venv
+/tests/python/.venv
 __pycache__/
 .pytest_cache/
-/tests/cat062.bin
+/tests/python/cat062.bin
