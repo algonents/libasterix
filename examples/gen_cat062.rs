@@ -1,6 +1,6 @@
-//! Encode a CAT-062 message with libasterix and write it to `python/cat062.bin`.
+//! Encode a CAT-062 message with libasterix and write it to `tests/python/cat062.bin`.
 //!
-//! The companion test `python/test_cat062.py` decodes this file with an
+//! The companion test `tests/python/test_cat062.py` decodes this file with an
 //! independent reference library (`libasterix` from the asterix-libs project)
 //! and asserts the values match what we encode here.
 //!
@@ -25,6 +25,6 @@ fn main() {
     };
 
     let bytes = encode_cat062_block(&[record]);
-    std::fs::write("python/cat062.bin", &bytes).expect("write python/cat062.bin");
-    println!("wrote python/cat062.bin ({} bytes)", bytes.len());
+    std::fs::write("tests/python/cat062.bin", &bytes).expect("write tests/python/cat062.bin");
+    println!("wrote tests/python/cat062.bin ({} bytes)", bytes.len());
 }
