@@ -1,15 +1,15 @@
 name: CI
 
 # Runs on every push to feat/* and fix/* working branches, on merges that land
-# on staging, and on PRs targeting staging (gate before merge).
+# on master, and on PRs targeting master (gate before merge).
 on:
   push:
     branches:
-      - staging
+      - master
       - "feat/**"
       - "fix/**"
   pull_request:
-    branches: [staging]
+    branches: [master]
 
 jobs:
   test:
