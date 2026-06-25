@@ -33,41 +33,41 @@ project — spec-generated, no shared code with this crate). If the reference
 decodes back exactly what we encoded, our encoder is correct.
 
 ```
-Cat062Record (Rust) --our encoder--> python/cat062.bin --reference decoder--> assert == input
+Cat062Record (Rust) --our encoder--> tests/cat062.bin --reference decoder--> assert == input
 ```
 
-Everything Python-related lives under `python/`; the Rust side stays at the
+Everything Python-related lives under `tests/`; the Rust side stays at the
 repo root.
 
 Files:
 
-- `examples/gen_cat062.rs` — encodes a CAT-062 record, writes `python/cat062.bin`
-- `python/test_cat062.py` — decodes that file with the reference lib, asserts each field
-- `python/requirements.txt` — pinned Python deps (`libasterix`, `pytest`)
-- `python/README.md` — details and field coverage
+- `examples/gen_cat062.rs` — encodes a CAT-062 record, writes `tests/cat062.bin`
+- `tests/test_cat062.py` — decodes that file with the reference lib, asserts each field
+- `tests/requirements.txt` — pinned Python deps (`libasterix`, `pytest`)
+- `tests/README.md` — details and field coverage
 
 ### Python environment
 
 The Python runtime is the system interpreter (`/usr/bin/python3`, ≥ 3.10
 required by the reference lib). Packages are isolated in a repo-local virtualenv
-`python/.venv/` (gitignored — not committed; recreate per machine). The
+`tests/.venv/` (gitignored — not committed; recreate per machine). The
 reference package installs as `libasterix` on PyPI but imports as `asterix`.
 
 First-time setup (from the repo root):
 
 ```sh
-python3 -m venv python/.venv
-python/.venv/bin/pip install -r python/requirements.txt
+python3 -m venv tests/.venv
+tests/.venv/bin/pip install -r tests/requirements.txt
 ```
 
 Run the interop suite:
 
 ```sh
-cargo run --example gen_cat062          # Rust encodes -> python/cat062.bin
-python/.venv/bin/pytest python/         # reference library decodes & verifies
+cargo run --example gen_cat062          # Rust encodes -> tests/cat062.bin
+tests/.venv/bin/pytest tests/         # reference library decodes & verifies
 ```
 
-`python/cat062.bin` is a generated artifact (gitignored); regenerate it with
+`tests/cat062.bin` is a generated artifact (gitignored); regenerate it with
 the `cargo run` step above before running pytest.
 
 ### Notes

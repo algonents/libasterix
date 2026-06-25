@@ -1,14 +1,14 @@
 """Independent verification of libasterix's CAT-062 encoder.
 
 The Rust example `examples/gen_cat062.rs` encodes a CAT-062 message and writes
-it to `python/cat062.bin`. This test decodes that file with a completely
+it to `tests/cat062.bin`. This test decodes that file with a completely
 independent reference library (`libasterix` from the asterix-libs project,
 https://github.com/zoranbosnjak/asterix-libs) and asserts the decoded values
 match what the Rust side encoded.
 
 Run:
     cargo run --example gen_cat062
-    python/.venv/bin/pytest python/
+    tests/.venv/bin/pytest tests/
 """
 
 import pathlib
